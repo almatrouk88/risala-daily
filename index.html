@@ -1,0 +1,177 @@
+<title>الرسالة · قراءة اليوم</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- NEXT-POINTER: issue=1 next_article_index=3 (بعد: مصر في دورة الفلك) -->
+<style>
+  :root{
+    --bg:#ffffff; --ink:#111111; --soft:#454545; --faint:#6b6b6b;
+    --line:#c9c9c9; --line-strong:#111; --card:#f4f4f4; --cardline:#d8d8d8;
+    --body:"Amiri","Scheherazade New","Geeza Pro","Times New Roman",serif;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#101010; --ink:#e9e9e9; --soft:#bdbdbd; --faint:#9a9a9a;
+      --line:#3a3a3a; --line-strong:#e9e9e9; --card:#1b1b1b; --cardline:#333;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#101010; --ink:#e9e9e9; --soft:#bdbdbd; --faint:#9a9a9a;
+    --line:#3a3a3a; --line-strong:#e9e9e9; --card:#1b1b1b; --cardline:#333;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:var(--body); font-size:1.28rem; line-height:2.0;
+    text-rendering:optimizeLegibility;
+  }
+  .wrap{max-width:40rem; margin:0 auto; padding:clamp(1rem,4vw,2rem) clamp(1rem,4vw,1.6rem) 3rem}
+
+  .mast{text-align:center; padding:1.4rem 0 1rem; border-bottom:3px double var(--line-strong); margin-bottom:.5rem}
+  .mast .k{font-size:.8rem; letter-spacing:.3em; font-weight:700; margin:0 0 .3rem}
+  .mast h1{font-size:clamp(2.6rem,11vw,3.8rem); margin:.1rem 0 .3rem; line-height:1.05; font-weight:700}
+  .mast .m{font-size:.98rem; color:var(--soft); margin:0}
+  .today{text-align:center; font-size:.82rem; letter-spacing:.14em; color:var(--faint); margin:.9rem 0 0; font-weight:700}
+
+  article{margin:2.4rem 0 0; padding-top:1.8rem; border-top:1px solid var(--line)}
+  article:first-of-type{border-top:0; margin-top:1.4rem}
+  .num{font-size:1.05rem; font-weight:700; color:var(--faint); letter-spacing:.1em}
+  h2{font-size:clamp(1.9rem,6.5vw,2.5rem); margin:.1rem 0 .15rem; line-height:1.2; font-weight:700; text-wrap:balance}
+  .by{color:var(--soft); font-size:1rem; margin:0 0 1.3rem}
+  .by b{color:var(--ink)}
+
+  .card{background:var(--card); border:1px solid var(--cardline); padding:.9rem 1.1rem; margin:0 0 1rem}
+  .card h3{margin:0 0 .3rem; font-size:.74rem; letter-spacing:.2em; font-weight:700}
+  .card p{margin:0; font-size:1.02rem; line-height:1.75; color:var(--ink)}
+
+  .matn{margin-top:1.4rem}
+  .matn p{margin:0 0 1.05rem; text-align:justify}
+  .g{font-weight:700; border-bottom:1px solid currentColor}
+  sup.fn{font-weight:700; font-size:.62em; line-height:0}
+  sup.fn a{text-decoration:none; color:var(--ink); padding:0 .12em}
+  sup.fn a::before{content:"["} sup.fn a::after{content:"]"}
+
+  .signoff{text-align:left; font-size:1.15rem; font-weight:700; margin:.4rem 0 0}
+  .notes{margin:1.5rem 0 0; padding:1rem 1.2rem; border-top:2px solid var(--line-strong); list-style:none; counter-reset:n}
+  .notes .nh{font-size:.74rem; letter-spacing:.2em; font-weight:700; color:var(--faint); margin:0 0 .7rem}
+  .notes li{margin:0 0 .7rem; font-size:.98rem; line-height:1.7; color:var(--soft); display:flex; gap:.5rem}
+  .notes li .fnum{font-weight:700; color:var(--ink); white-space:nowrap}
+  .notes li .fnum a{color:inherit; text-decoration:none}
+  .notes li b{color:var(--ink)}
+  .src{display:inline-block; margin:1rem 0 0; font-size:.9rem; color:var(--faint)}
+  :target{background:rgba(120,120,120,.18)}
+
+  footer{margin:3rem 0 0; padding-top:1.4rem; border-top:3px double var(--line-strong); text-align:center; color:var(--soft)}
+  footer .big{font-weight:700; color:var(--ink); font-size:1.15rem; margin:.2rem 0}
+  footer p{margin:.25rem 0; font-size:.95rem}
+
+  .tt{position:fixed; top:.7rem; left:.7rem; width:2.4rem; height:2.4rem; border:1px solid var(--line);
+    background:var(--card); color:var(--ink); border-radius:50%; cursor:pointer; font-size:1rem}
+  @media print{.tt{display:none}}
+</style>
+
+<button class="tt" id="tt" aria-label="تبديل الوضع">◐</button>
+
+<div class="wrap">
+  <header class="mast">
+    <p class="k">مجلة الرسالة</p>
+    <h1>الرِّسالة</h1>
+    <p class="m"><!--META-->العدد الأوّل · ١٥ يناير ١٩٣٣ · القاهرة<!--/META--></p>
+    <p class="today"><!--TODAY-->قراءة اليوم — مقالتان من افتتاح المجلّة<!--/TODAY--></p>
+  </header>
+
+  <!--ARTICLES-->
+  <!-- ===== ١ ===== -->
+  <article>
+    <div class="num">٠١</div>
+    <h2>الرِّسالة</h2>
+    <p class="by">افتتاحيّة المجلّة · بقلم <b>أحمد حسن الزيّات</b></p>
+
+    <div class="card">
+      <h3>مَن الكاتب</h3>
+      <p>أحمد حسن الزيّات (١٨٨٥–١٩٦٨): أديبٌ ومترجمٌ مصريّ، مؤسّس «الرسالة» ورئيس تحريرها، صاحب أسلوبٍ بلاغيٍّ مسجوعٍ رفيع. هذه أوّل كلماته في أوّل عدد — أشبه بـ«بيانٍ تأسيسيّ» يُعلن روح المجلّة.</p>
+    </div>
+    <div class="card">
+      <h3>لماذا تستحقّ القراءة</h3>
+      <p>عهدٌ يقطعه الزيّات: أن يقاوم طغيان السياسة على الأدب، ويصل القديم بالحديث والشرق بالغرب. تقرأ فيها نبض النهضة الأدبيّة في ثلاثينيّات القرن الماضي، ولغةً تُكتب كما تُنقش.</p>
+    </div>
+
+    <div class="matn">
+      <p>. . . وأخيراً تغلب العزم المصمم على <span class="g" data-note="الخُوار: الضعيف المتخاذل. أي تغلّب عزمُه القويّ على ترددٍ ضعيفٍ كان يثبّطه.">التردد الخوار</span> فصدرت الرسالة: وما سلط على نفوسنا هذا التردد إلا <span class="g" data-note="نُذُر: تحذيراتٌ وإنذارات (جمع نذير). إشاعاتٌ محبِطة تُروى عن فشل الصحافة الأدبية.">نُذُر</span> تشاع وأمثال تروى. . وكلها تصور الصحافة الأدبية في مصر سبيلا <span class="g" data-note="الصُّوى: الأعلام والعلامات التي يُهتدى بها في الطريق. أي طريقٌ ضاعت معالمُه.">ضلت صواها</span> وكثرت <span class="g" data-note="صَرعى: الساقطون والقتلى. أي كثُر ضحاياها من المجلّات التي أخفقت.">صرعاها</span> فلم <span class="g" data-note="أوفى على الغاية: أشرف عليها وبلغها. أي لم يبلغ أيٌّ منها هدفه.">يوفِ</span> أحد منها على الغاية، والعلة أن السياسة طغت على الفن الرفيع، والأزمة مكنت للأدب الرخيص، والأمة من خداع الباطل في لَبْس من الأمر لا تُميز ما تأخذ مما تدع! فلما تناصرت على هذه الوساوس حجج العقل، ونوازع الواجب، وعِدَات الأمل، أصبحت الأسباب التي كانت تدفع إلى <span class="g" data-note="النكول: التراجع والإحجام والجُبن عن المضيّ.">النكول</span> بواعث على الإقدام، لأن غاية (الرسالة) أن تقاوم طغيان السياسة <span class="g" data-note="صقل الطبع: تهذيب الفطرة وتنقيتها. أي تواجه السياسةَ بتهذيب الأذواق لا بمهاترتها.">بصقل الطبع</span>، و<span class="g" data-note="البهرج: الزائف الرديء. أي تواجه الأدب المزيَّف بتربية الذوق.">بهرجَ الأدب</span> بتثقيف الذوق، وحيرة الأمة بتوضيح الطريق.</p>
+
+      <p>أجل هذه غاية الرسالة! وما <span class="g" data-note="يَصدِفنا عن سبيلها: يصرفنا ويبعدنا عن طريقها.">يَصْدِفنا</span> عن سبيلها ما نتوقع من صعاب وأذى، فإن أكثر الناهضين بها قد <span class="g" data-note="طَوَوا مراحل الشباب على منصة التعليم: قضَوا شبابهم معلِّمين، كنايةٌ عن خبرةٍ طويلة.">طووا مراحل الشباب على منصة التعليم</span>، فلا يعييهم أن <span class="g" data-note="يُخلِقوا بُرْدَ الكهولة على مكتب الصحافة: البُرد ثوب؛ أي يُبلوا ثيابَ كهولتهم في الصحافة كما أبلَوا شبابَهم في التعليم.">يُخلقوا بُرْد الكهولة على مكتب الصحافة</span>، ومن قضى ربيع الحياة في <span class="g" data-note="مجادب: أرضٌ قاحلةٌ جدباء (مفردها مَجْدَبة). استعارةٌ لمشقّة التعليم.">مجادب</span> ذلك، لا يشق عليه أن يقضي خريفها في مجاهل هذا!</p>
+
+      <p>أما مبدأ الرسالة فربط القديم بالحديث، ووصل الشرق بالغرب. فبربطها القديم بالحديث تضع الأساس لمن <span class="g" data-note="هار بناؤه على الرمل: انهار وسقط لأنه بُني على غير أساسٍ ثابت.">هار بناؤه على الرمل</span>، وتقيم الدَّرَج لمن استحال رقيه <span class="g" data-note="الطُّفور: القفز والوثب. أي مَن أراد أن يرتقي دفعةً واحدةً دون تدرّج.">بالطفور</span>! وبوصلها الشرق بالغرب تساعد على وجدان <span class="g" data-note="الحلقة المفقودة: يشير إلى مقال أحمد أمين «حلقة مفقودة» في العدد نفسه — الحلقة التي تصل ماضي الأمة بحاضرها.">الحلقة التي ينشدها صديقنا الأستاذ أحمد أمين</span> في مقاله القيم بهذا العدد. فإن اعتمادها على الأدباء البارعين، واعتصامها <span class="g" data-note="خُلصانها الأدنَين: أصدقاؤها المخلصون الأقربون (خُلصان جمع خالص/خليل).">بخلصانها الأدنين</span> من أعضاء <span class="g" data-note="لجنة التأليف والترجمة والنشر: لجنةٌ أدبيّةٌ شهيرة أُسِّست سنة ١٩١٤ (من روّادها أحمد أمين)، أسهمت في نهضة الكتابة والترجمة بمصر.">لجنة التأليف والترجمة والنشر</span>، وهم صفوة من خرَّجت مصر الحديثة، أحدثا هذه الثقة التي تشيع في الحديث عن غير قصد.</p>
+
+      <p>فإلى <span class="g" data-note="أبناء النيل وبَردى والرافدين: مصرُ (النيل)، والشامُ (بَردى نهر دمشق)، والعراقُ (الرافدان: دجلة والفرات). أي إلى العرب جميعًا.">أبناء النيل وبَردى والرافدين</span> نتقدم بهذه الرسالة، راجين أن <span class="g" data-note="تضطلع بحظها: تنهض بنصيبها وتقوم به على أتمّ وجه.">تضطلع بحظها</span> من الجهد المشترك في تقوية النهضة الفكرية، وتوثيق الروابط الأدبية، وتوحيد الثقافة العربية. وقوة الرجاء بالله.</p>
+
+      <p class="signoff">أحمد حسن الزيّات</p>
+      <a class="src" href="https://ar.wikisource.org/wiki/مجلة_الرسالة/العدد_1/الرسالة" target="_blank" rel="noopener">المصدر الكامل: ويكي مصدر ↗</a>
+    </div>
+  </article>
+
+  <!-- ===== ٢ ===== -->
+  <article>
+    <div class="num">٠٢</div>
+    <h2>اللّغة العربيّة كأداةٍ علميّة</h2>
+    <p class="by">بقلم <b>د. علي مصطفى مشرَّفة</b> — الأستاذ بكلّية العلوم</p>
+
+    <div class="card">
+      <h3>مَن الكاتب</h3>
+      <p>علي مصطفى مشرَّفة (١٨٩٨–١٩٥٠): عالِمُ فيزياءٍ مصريّ كبير لُقّب بـ«أينشتاين العرب»، وأوّل عميدٍ مصريّ لكلّية العلوم. اللافت أن يكتب عالِمُ فيزياءٍ عن اللغة.</p>
+    </div>
+    <div class="card">
+      <h3>لماذا تستحقّ القراءة</h3>
+      <p>سؤالٌ ما زال حيًّا بعد قرن: هل تصلح العربيّة لغةً للعلم الحديث؟ ويجيب بمنهجٍ رصين — التأليف أوّلًا ثمّ يُستخلَص المصطلح، وتعريب الجذور اليونانيّة واللاتينيّة، ولجانٌ متخصّصة.</p>
+    </div>
+
+    <div class="matn">
+      <p>تجتاز اللغة العربية في عصرنا الحالي مرحلة من مراحل تطورها سيكون لها أثر واضح في مستقبلها. فاللغة التي كان عرب البادية يتكلمونها <span class="g" data-note="بسليقتهم: بفطرتهم وطبعهم دون تكلّفٍ أو تعلّم. السليقة: الطبيعة التي جُبل عليها الإنسان.">بسليقتهم</span> فيصفون بها حياتهم في صحرائهم وبين إبلهم <span class="g" data-note="آرامهم: الظباء البيض (مفردها رِئْم). «بين إبلهم وآرامهم» أي في باديتهم.">وآرامهم</span>، والتي صارت بعد ذلك لغة الكتاب والفلاسفة في عصور المدنية الإسلامية؛ تلك اللغة قد <span class="g" data-note="كُتب عليها أن يصيبها الخمول: قُدّر عليها الركود والفتور قرونًا.">كتب عليها أن يصيبها الخمول</span> فتبقى مئات السنين بعيدة عن مجهودات البشر، ثم ها نحن نراها اليوم وقد <span class="g" data-note="بُعثت من مرقدها: أُحييت بعد رقادٍ طويل. استعارةٌ لنهضة العربية الحديثة.">بعثت من مرقدها</span> في ثوب جديد فصارت لغة الكتابة والتأليف والتعليم في عصرٍ عمّته حضارة مستحدثة. فاللغة العربية تبعث اليوم <span class="g" data-note="كما بُعث الفتية بعد أن ضُرب على آذانهم في الكهف: إشارةٌ إلى أهل الكهف؛ «ضرب على آذانهم» تعبيرٌ قرآنيّ معناه أُنيموا. أي تستيقظ العربية على عالمٍ تغيّر كلّيًّا حولها.">كما بعث الفتية بعد أن ضرب على آذانهم في الكهف</span> سنين عددا فتجد نفسها في عالم جديد موحش. فاللغة كالكائن الحي في تفاعل مستمر مع البيئة التي تحيط به؛ فأما تلاءما فاشتد الكائن ونما، وأما تنافرا فاضمحل وهلك.</p>
+
+      <p>وإذا قارنا البيئة الفكرية الحديثة بأيام ازدهار الحضارة العربية، فأول الفوارق تغلب الروح العلمية على تفكيرنا الحديث. فالمدنية الحالية مدنية كشف واختراع واستنباط، مظهرها غاصٌّ بالآلات والعدد. فلا عجب أن تشعر <span class="g" data-note="لغة العِيس والسِّهام: العِيس كرام الإبل. كنايةٌ عن لغة البادية القديمة، يقابلها «الطيارات والمدافع» — فجوة الزمن بين لغةٍ صحراويّة وعصرٍ صناعيّ.">لغة العيس والسهام</span> بوحشة بين الطيارات والمدافع الرشاشة. ومع تطور اللغة بدخول ألفاظ مستحدثة وانتشار التعليم، لا نستطيع أن نزعم أن <span class="g" data-note="الشُّقّة بين اللغة وبيئتها: البُعد والمسافة بينهما. أي لم تختفِ الفجوة تمامًا.">الشقة</span> بين اللغة وبيئتها قد تلاشت تماما؛ فلا تزال مدلولات لم تتسع اللغة للتعبير عنها.</p>
+
+      <p>وبعبارة أخرى: اللغة العربية الحديثة لا تزال في دور التكوين. إن مآلها متوقف علينا نحن اليوم؛ ففي يدنا قتلها بالجمود، وفي يدنا إحياؤها بالتبصر وحسن الرعاية والتمشي بها في سبيلها الطبيعي كلغة حية واحدة. ومن حسن الحظ أن انتشار المطبوعات وسهولة الانتقال والإذاعة اللاسلكية عوامل قوية على توحيد اللغة إذا أحسنّا استخدامها.</p>
+
+      <p>أما صعوبات العربية كأداةٍ علمية: فكمية التأليف العلمي ضئيلة، ويعوز الموجودَ التهذيبُ والتجانس في المصطلحات. والطريقة المثلى تأليف لجان من الأخصائيين، وتشجيع التأليف في الفروع العلمية حتى تتألف ثروة علمية. ويجب أن أذكر أن <span class="g" data-note="خلاصة منهجه: المصطلح يُستخلَص بعد أن يشيع في التأليف العلمي، لا أن يُفرَض سلفًا — وإلا كان تسرّعًا يضيع أكثره. رؤيةٌ عمليّةٌ سبقت زمنها.">من العبث أن يضع علماء اللغة المصطلحات قبل ورودها في المؤلفات العلمية وشيوعها</span>. وأرى جواز استعمال مصطلح أجنبي (بعد تحويره ليوافق أوزان العربية) إن كان مستعملا في معظم اللغات العلمية، ومثله يكون مشتقًّا من أصل إغريقي أو لاتيني <span class="g" data-note="لا جُناح علينا: لا إثمَ ولا حرجَ علينا. أي يجوز أن نشتقّ من الأصل اليونانيّ أو اللاتينيّ كما اشتقّت منه سائر اللغات.">لا جناح علينا</span> إذا اشتققنا منه كما اشتق غيرنا؛ أما المقصور على لغةٍ أو لغتين فالأولى أن يكون له لفظ عربي.</p>
+
+      <p class="signoff">علي مصطفى مشرَّفة</p>
+      <a class="src" href="https://ar.wikisource.org/wiki/مجلة_الرسالة/العدد_1/اللغة_العربية_كأداة_علمية" target="_blank" rel="noopener">المصدر الكامل: ويكي مصدر ↗</a>
+    </div>
+  </article>
+  <!--/ARTICLES-->
+
+  <footer>
+    <!--FOOTER-->
+    <p class="big">✦ نهاية قراءة اليوم ✦</p>
+    <p>بقي من العدد الأوّل ١٨ بابًا ومقالة.</p>
+    <p>غدًا بإذن الله: «مصر في دورة الفلك».</p>
+    <!--/FOOTER-->
+  </footer>
+</div>
+
+<script>
+(function(){
+  var arNum=function(n){return String(n).replace(/[0-9]/g,function(d){return "٠١٢٣٤٥٦٧٨٩"[d]})};
+  document.querySelectorAll('.matn').forEach(function(matn,ai){
+    var terms=matn.querySelectorAll('.g'); if(!terms.length) return;
+    var ol=document.createElement('ol'); ol.className='notes';
+    ol.innerHTML='<div class="nh">حواشٍ وشروح</div>';
+    terms.forEach(function(t,i){
+      var n=i+1, rid='r'+ai+'-'+n, fid='f'+ai+'-'+n, an=arNum(n);
+      t.setAttribute('title', t.dataset.note);
+      var sup=document.createElement('sup'); sup.className='fn';
+      sup.innerHTML='<a id="'+rid+'" href="#'+fid+'">'+an+'</a>';
+      t.after(sup);
+      var li=document.createElement('li'); li.id=fid;
+      li.innerHTML='<span class="fnum"><a href="#'+rid+'">'+an+'.</a></span><span><b>'+t.textContent+'</b> — '+t.dataset.note+'</span>';
+      ol.appendChild(li);
+    });
+    matn.querySelector('.src').before(ol);
+  });
+  var tt=document.getElementById('tt'), root=document.documentElement;
+  tt.addEventListener('click',function(){
+    var cur=root.getAttribute('data-theme');
+    var dark=cur?cur==='dark':matchMedia('(prefers-color-scheme:dark)').matches;
+    root.setAttribute('data-theme',dark?'light':'dark');
+  });
+})();
+</script>

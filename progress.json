@@ -1,0 +1,10 @@
+{
+  "pages_url": "https://almatrouk88.github.io/risala-daily/",
+  "current_issue": 1,
+  "next_article_index": 3,
+  "articles_per_day": 2,
+  "done": [
+    { "issue": 1, "index": 1, "slug": "الرسالة", "title": "الرسالة", "date": "2026-08-22" },
+    { "issue": 1, "index": 2, "slug": "اللغة_العربية_كأداة_علمية", "title": "اللغة العربية كأداة علمية", "date": "2026-08-22" }
+  ]
+}
