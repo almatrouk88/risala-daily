@@ -1,0 +1,78 @@
+  :root{
+    --bg:#ffffff; --ink:#111111; --soft:#454545; --faint:#6b6b6b;
+    --line:#c9c9c9; --line-strong:#111; --card:#f4f4f4; --cardline:#d8d8d8;
+    --body:"Amiri","Scheherazade New","Geeza Pro","Times New Roman",serif;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#101010; --ink:#e9e9e9; --soft:#bdbdbd; --faint:#9a9a9a;
+      --line:#3a3a3a; --line-strong:#e9e9e9; --card:#1b1b1b; --cardline:#333;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#101010; --ink:#e9e9e9; --soft:#bdbdbd; --faint:#9a9a9a;
+    --line:#3a3a3a; --line-strong:#e9e9e9; --card:#1b1b1b; --cardline:#333;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:var(--body); font-size:1.28rem; line-height:2.0;
+    text-rendering:optimizeLegibility;
+  }
+  .wrap{max-width:40rem; margin:0 auto; padding:clamp(1rem,4vw,2rem) clamp(1rem,4vw,1.6rem) 3rem}
+
+  .mast{text-align:center; padding:1.4rem 0 1rem; border-bottom:3px double var(--line-strong); margin-bottom:.5rem}
+  .mast .k{font-size:.8rem; letter-spacing:.3em; font-weight:700; margin:0 0 .3rem}
+  .mast h1{font-size:clamp(2.6rem,11vw,3.8rem); margin:.1rem 0 .3rem; line-height:1.05; font-weight:700}
+  .mast .m{font-size:.98rem; color:var(--soft); margin:0}
+  .today{text-align:center; font-size:.82rem; letter-spacing:.14em; color:var(--faint); margin:.9rem 0 0; font-weight:700}
+
+  article{margin:2.4rem 0 0; padding-top:1.8rem; border-top:1px solid var(--line)}
+  article:first-of-type{border-top:0; margin-top:1.4rem}
+  .num{font-size:1.05rem; font-weight:700; color:var(--faint); letter-spacing:.1em}
+  h2{font-size:clamp(1.9rem,6.5vw,2.5rem); margin:.1rem 0 .15rem; line-height:1.2; font-weight:700; text-wrap:balance}
+  .by{color:var(--soft); font-size:1rem; margin:0 0 1.3rem}
+  .by b{color:var(--ink)}
+
+  .card{background:var(--card); border:1px solid var(--cardline); padding:.9rem 1.1rem; margin:0 0 1rem}
+  .card h3{margin:0 0 .3rem; font-size:.74rem; letter-spacing:.2em; font-weight:700}
+  .card p{margin:0; font-size:1.02rem; line-height:1.75; color:var(--ink)}
+
+  .matn{margin-top:1.4rem}
+  .matn p{margin:0 0 1.05rem; text-align:justify}
+  .g{font-weight:700; border-bottom:1px solid currentColor}
+  sup.fn{font-weight:700; font-size:.62em; line-height:0}
+  sup.fn a{text-decoration:none; color:var(--ink); padding:0 .12em}
+  sup.fn a::before{content:"["} sup.fn a::after{content:"]"}
+
+  .signoff{text-align:left; font-size:1.15rem; font-weight:700; margin:.4rem 0 0}
+  .notes{margin:1.5rem 0 0; padding:1rem 1.2rem; border-top:2px solid var(--line-strong); list-style:none; counter-reset:n}
+  .notes .nh{font-size:.74rem; letter-spacing:.2em; font-weight:700; color:var(--faint); margin:0 0 .7rem}
+  .notes li{margin:0 0 .7rem; font-size:.98rem; line-height:1.7; color:var(--soft); display:flex; gap:.5rem}
+  .notes li .fnum{font-weight:700; color:var(--ink); white-space:nowrap}
+  .notes li .fnum a{color:inherit; text-decoration:none}
+  .notes li b{color:var(--ink)}
+  .src{display:inline-block; margin:1rem 0 0; font-size:.9rem; color:var(--faint)}
+  :target{background:rgba(120,120,120,.18)}
+
+  footer{margin:3rem 0 0; padding-top:1.4rem; border-top:3px double var(--line-strong); text-align:center; color:var(--soft)}
+  footer .big{font-weight:700; color:var(--ink); font-size:1.15rem; margin:.2rem 0}
+  footer p{margin:.25rem 0; font-size:.95rem}
+
+  .tt{position:fixed; top:.7rem; left:.7rem; width:2.4rem; height:2.4rem; border:1px solid var(--line);
+    background:var(--card); color:var(--ink); border-radius:50%; cursor:pointer; font-size:1rem}
+  @media print{.tt{display:none}}
+
+  /* شريط تنقّل بين الأيام */
+  .nav{display:flex; align-items:center; justify-content:space-between; gap:.6rem;
+    margin:0 0 1rem; padding:.4rem 0; border-bottom:1px solid var(--line); font-size:.9rem}
+  .nav a{color:var(--ink); text-decoration:none; border:1px solid var(--line); border-radius:6px;
+    padding:.35rem .7rem; background:var(--card)}
+  .nav a.disabled{opacity:.35; pointer-events:none}
+  .nav .home{font-weight:700; border:0; background:none; letter-spacing:.05em}
+  .archive-list{list-style:none; padding:0; margin:1.2rem 0}
+  .archive-list li{margin:0 0 .1rem}
+  .archive-list a{display:block; padding:.7rem .9rem; border:1px solid var(--line); border-radius:8px;
+    margin-bottom:.5rem; color:var(--ink); text-decoration:none; background:var(--card)}
+  .archive-list .d{font-weight:700} .archive-list .t{color:var(--soft); font-size:.92rem}
