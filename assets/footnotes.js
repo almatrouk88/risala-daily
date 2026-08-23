@@ -45,6 +45,28 @@
     else { (d.exitFullscreen||d.webkitExitFullscreen||function(){}).call(d); }
   });
 
+  // 4) تقليب الصفحات باللمس: يسار = التالي، يمين = السابق، الوسط = إظهار/إخفاء الأدوات
+  var hint=document.createElement('div'); hint.className='taphint'; document.body.appendChild(hint);
+  var hintT;
+  function showHint(msg){ hint.textContent=msg; hint.classList.add('show'); clearTimeout(hintT);
+    hintT=setTimeout(function(){ hint.classList.remove('show'); },900); }
+  document.addEventListener('click', function(e){
+    if(e.target.closest('a,button')) return;           // اترك الروابط والأزرار تعمل
+    var w=window.innerWidth, x=e.clientX;
+    var page=Math.round(window.innerHeight*0.88);
+    if(x < w*0.35){ window.scrollBy(0, page); }         // يسار الشاشة ← الصفحة التالية
+    else if(x > w*0.65){ window.scrollBy(0, -page); }   // يمين الشاشة ← الصفحة السابقة
+    else { document.body.classList.toggle('hide-ui');   // الوسط ← إظهار/إخفاء الأدوات
+           showHint(document.body.classList.contains('hide-ui')?'وضع القراءة':'الأدوات ظاهرة'); }
+  });
+  // إخفاء الأدوات تلقائيًّا عند الدخول لملء الشاشة
+  ['fullscreenchange','webkitfullscreenchange'].forEach(function(ev){
+    document.addEventListener(ev, function(){
+      var fs=document.fullscreenElement||document.webkitFullscreenElement;
+      document.body.classList.toggle('hide-ui', !!fs);
+    });
+  });
+
   function setFs(v){ fs=Math.max(88,Math.min(196,v)); root.style.setProperty('--fs',fs+'%'); localStorage.setItem(FS_KEY,fs); }
   document.getElementById('c-up').addEventListener('click',function(){ setFs(fs+12); });
   document.getElementById('c-dn').addEventListener('click',function(){ setFs(fs-12); });
