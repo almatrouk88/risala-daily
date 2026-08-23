@@ -65,7 +65,8 @@
   var inDays=location.pathname.indexOf('/days/')>=0, pre=inDays?'../':'';
   var old=document.getElementById('tt'); if(old) old.remove();
   var ctl=document.createElement('div'); ctl.className='ctl';
-  ctl.innerHTML='<button id="c-pg" aria-label="وضع الكتاب">▤</button>'
+  ctl.innerHTML='<button id="c-top" aria-label="البداية">⤒</button>'
+              +'<button id="c-pg" aria-label="وضع الكتاب">▤</button>'
               +'<button id="c-bm" aria-label="علامة الصفحة">🔖</button>'
               +'<button id="c-th" aria-label="الوضع الليلي">◐</button>'
               +'<button id="c-dn" aria-label="تصغير الخط">A−</button>'
@@ -77,6 +78,8 @@
   document.getElementById('c-sr').addEventListener('click',function(){ location.href=pre+'search.html'; });
   document.getElementById('c-mk').addEventListener('click',function(){ location.href=pre+'marks.html'; });
   document.getElementById('c-ar').addEventListener('click',function(){ location.href=pre+'archive.html'; });
+  document.getElementById('c-top').addEventListener('click',function(){
+    if(paged) setPage(0); else window.scrollTo(0,0); showHint('⤒ البداية'); });
 
   var hint=document.createElement('div'); hint.className='taphint'; body.appendChild(hint);
   var hintT;

@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
-<title>الرسالة · الأعداد</title>
+<title>الرسالة · عدد</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="assets/style.css?v=10">
 <link rel="manifest" href="app.webmanifest">
@@ -16,28 +16,31 @@
 <div class="wrap">
   <nav class="nav">
     <a class="home" href="index.html">📜 الرسالة</a>
-    <span style="display:flex;gap:.45rem"><a href="search.html">🔍 بحث</a><a href="marks.html">🔖 علاماتي</a></span>
+    <span style="display:flex;gap:.45rem"><a href="archive.html">☰ الأعداد</a><a href="search.html">🔍 بحث</a></span>
   </nav>
   <header class="mast">
     <p class="k">مجلة الرسالة</p>
-    <h1>الأعداد</h1>
-    <p class="m">تصفّح كل عدد ومقالاته · من ١٩٣٣</p>
+    <h1 id="ititle">العدد</h1>
+    <p class="m" id="imeta"></p>
   </header>
   <ul class="archive-list" id="list"><li>…جارٍ التحميل</li></ul>
 </div>
 <script>
 var arNum=function(n){return String(n).replace(/[0-9]/g,function(d){return "٠١٢٣٤٥٦٧٨٩"[d]});};
+var n=parseInt(new URLSearchParams(location.search).get('n')||'1',10);
 fetch('index.json',{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){
-  var arts=j.articles||[], issues=j.issues||[];
-  var byIssue={}; arts.forEach(function(a){ (byIssue[a.issue]=byIssue[a.issue]||[]).push(a); });
+  var iss=(j.issues||[]).filter(function(x){return x.n===n;})[0]||{n:n};
+  var arts=(j.articles||[]).filter(function(a){return a.issue===n;}).sort(function(a,b){
+    return (a.day-b.day)|| (a.id<b.id?-1:1); });
+  document.getElementById('ititle').textContent='العدد '+arNum(n);
+  document.getElementById('imeta').textContent=(iss.date||'')+' · '+arNum(arts.length)+' مقالة متاحة';
   var ul=document.getElementById('list'); ul.innerHTML='';
-  issues.sort(function(a,b){return a.n-b.n;}).forEach(function(iss){
-    var cnt=(byIssue[iss.n]||[]).length;
-    var li=document.createElement('li'); var a=document.createElement('a');
-    a.href='issue.html?n='+iss.n;
-    a.innerHTML='<span class="d">العدد '+arNum(iss.n)+'</span>'
-      +'<span class="t">'+(iss.date||'')+' · '+arNum(cnt)+' مقالة متاحة</span>';
-    li.appendChild(a); ul.appendChild(li);
+  if(!arts.length){ ul.innerHTML='<li>لا مقالات متاحة بعد لهذا العدد.</li>'; return; }
+  arts.forEach(function(a,i){
+    var li=document.createElement('li'); var lnk=document.createElement('a');
+    lnk.href=a.file+'?art='+a.id;
+    lnk.innerHTML='<span class="d">'+arNum(i+1)+'. '+a.title+'</span><span class="t">'+a.author+'</span>';
+    li.appendChild(lnk); ul.appendChild(li);
   });
 });
 document.getElementById('tt').addEventListener('click',function(){
