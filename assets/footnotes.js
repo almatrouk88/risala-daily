@@ -124,7 +124,7 @@
   }
 
   // ---- الأزرار ----
-  function setFs(v){ fs=Math.max(88,Math.min(196,v)); root.style.setProperty('--fs',fs+'%'); localStorage.setItem(FS_KEY,fs); relayout(); }
+  function setFs(v){ fs=Math.max(80,Math.min(360,v)); root.style.setProperty('--fs',fs+'%'); localStorage.setItem(FS_KEY,fs); relayout(); }
   document.getElementById('c-up').addEventListener('click',function(){ setFs(fs+12); });
   document.getElementById('c-dn').addEventListener('click',function(){ setFs(fs-12); });
   document.getElementById('c-th').addEventListener('click',function(){
