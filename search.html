@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>الرسالة · البحث</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="assets/style.css?v=6">
+<link rel="manifest" href="app.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#111111">
+<link rel="apple-touch-icon" href="assets/icon.svg">
+<style>
+  .field{display:flex; flex-direction:column; gap:.3rem; margin:0 0 .8rem}
+  .field label{font-size:.82rem; font-weight:700; color:var(--soft)}
+  .field input, .field select{font-family:var(--body); font-size:1.1rem; padding:.6rem .7rem;
+    border:1px solid var(--line); border-radius:8px; background:var(--card); color:var(--ink)}
+  .adv{display:none; border-top:1px solid var(--line); margin-top:.6rem; padding-top:.8rem}
+  .adv.show{display:block}
+  .adv-grid{display:grid; grid-template-columns:1fr 1fr; gap:.7rem}
+  .toggle-adv{background:none; border:0; color:var(--ink); font-weight:700; cursor:pointer;
+    font-family:var(--body); font-size:.95rem; padding:.3rem 0; text-decoration:underline}
+  .count{color:var(--faint); font-size:.9rem; margin:.4rem 0 1rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="nav">
+    <a class="home" href="index.html">📜 الرسالة</a>
+    <span>🔍 البحث</span>
+    <a href="archive.html">الأرشيف</a>
+  </nav>
+  <header class="mast">
+    <p class="k">مجلة الرسالة</p>
+    <h1>البحث</h1>
+    <p class="m">ابحث في المقالات والكتّاب</p>
+  </header>
+
+  <div class="field">
+    <label for="q">بحث سريع — اسم مقالة أو كاتب</label>
+    <input id="q" type="search" placeholder="مثال: أحمد أمين، اللغة العربية…" autocomplete="off">
+  </div>
+  <button class="toggle-adv" id="toggleAdv">▾ بحث متقدّم</button>
+  <div class="adv" id="adv">
+    <div class="adv-grid">
+      <div class="field"><label for="fTitle">اسم المقالة</label><input id="fTitle" type="text"></div>
+      <div class="field"><label for="fAuthor">الكاتب</label><input id="fAuthor" type="text"></div>
+      <div class="field"><label for="fYear">السنة</label><select id="fYear"><option value="">الكل</option></select></div>
+      <div class="field"><label for="fIssue">العدد</label><select id="fIssue"><option value="">الكل</option></select></div>
+    </div>
+  </div>
+
+  <p class="count" id="count"></p>
+  <ul class="archive-list" id="results"></ul>
+</div>
+<script>
+var norm=function(s){return (s||'').replace(/[أإآ]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه').replace(/[ًٌٍَُِّْـ]/g,'').toLowerCase().trim();};
+var arNum=function(n){return String(n).replace(/[0-9]/g,function(d){return "٠١٢٣٤٥٦٧٨٩"[d]});};
+var DATA=[];
+fetch('index.json',{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){
+  DATA=j.articles||[];
+  var years=[...new Set(DATA.map(function(a){return a.year;}))].sort();
+  var issues=[...new Set(DATA.map(function(a){return a.issue;}))].sort(function(a,b){return a-b;});
+  years.forEach(function(y){ var o=document.createElement('option'); o.value=y; o.textContent=y; document.getElementById('fYear').appendChild(o); });
+  issues.forEach(function(i){ var o=document.createElement('option'); o.value=i; o.textContent='العدد '+arNum(i); document.getElementById('fIssue').appendChild(o); });
+  run();
+});
+function run(){
+  var q=norm(document.getElementById('q').value);
+  var t=norm(document.getElementById('fTitle').value), a=norm(document.getElementById('fAuthor').value);
+  var y=document.getElementById('fYear').value, iss=document.getElementById('fIssue').value;
+  var res=DATA.filter(function(x){
+    if(q){ if(norm(x.title).indexOf(q)<0 && norm(x.author).indexOf(q)<0) return false; }
+    if(t && norm(x.title).indexOf(t)<0) return false;
+    if(a && norm(x.author).indexOf(a)<0) return false;
+    if(y && String(x.year)!==y) return false;
+    if(iss && String(x.issue)!==iss) return false;
+    return true;
+  });
+  var ul=document.getElementById('results'); ul.innerHTML='';
+  document.getElementById('count').textContent=res.length? ('النتائج: '+arNum(res.length)) : 'لا نتائج مطابقة';
+  res.forEach(function(x){
+    var li=document.createElement('li'); var link=document.createElement('a');
+    link.href=x.file+'?art='+x.id;
+    link.innerHTML='<span class="d">'+x.title+'</span><span class="t">'+x.author+' · العدد '+arNum(x.issue)+' · '+x.year+'</span>';
+    li.appendChild(link); ul.appendChild(li);
+  });
+}
+['q','fTitle','fAuthor'].forEach(function(id){ document.getElementById(id).addEventListener('input',run); });
+['fYear','fIssue'].forEach(function(id){ document.getElementById(id).addEventListener('change',run); });
+document.getElementById('toggleAdv').addEventListener('click',function(){
+  var adv=document.getElementById('adv'); adv.classList.toggle('show');
+  this.textContent=(adv.classList.contains('show')?'▴':'▾')+' بحث متقدّم';
+});
+</script>
+</body>
+</html>

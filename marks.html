@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>الرسالة · علاماتي</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="assets/style.css?v=6">
+<link rel="manifest" href="app.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#111111">
+<link rel="apple-touch-icon" href="assets/icon.svg">
+<style>
+  .sect{font-size:.8rem; letter-spacing:.2em; font-weight:700; color:var(--accent,var(--faint));
+    margin:1.6rem 0 .6rem; border-bottom:1px solid var(--line); padding-bottom:.3rem}
+  .quote{font-size:1.05rem; line-height:1.8; margin:.2rem 0}
+  .meta{color:var(--faint); font-size:.85rem; margin-top:.2rem}
+  .del{background:none; border:0; color:var(--faint); cursor:pointer; font-size:1.1rem; float:left}
+  .empty{color:var(--faint); text-align:center; margin:2rem 0}
+</style>
+</head>
+<body>
+<button class="tt" id="tt" aria-label="تبديل الوضع">◐</button>
+<div class="wrap">
+  <nav class="nav">
+    <a class="home" href="index.html">📜 الرسالة</a>
+    <span>🔖 علاماتي</span>
+    <a href="search.html">🔍 بحث</a>
+  </nav>
+  <header class="mast">
+    <p class="k">مجلة الرسالة</p>
+    <h1>علاماتي</h1>
+    <p class="m">علاماتك المرجعية وتظليلاتك</p>
+  </header>
+  <div id="bmSect"></div>
+  <div id="hlSect"></div>
+</div>
+<script>
+var arNum=function(n){return String(n).replace(/[0-9]/g,function(d){return "٠١٢٣٤٥٦٧٨٩"[d]});};
+function load(k){ try{return JSON.parse(localStorage.getItem(k)||'[]');}catch(e){return [];} }
+function save(k,v){ localStorage.setItem(k,JSON.stringify(v)); }
+function fmt(ts){ try{var d=new Date(ts); return arNum(d.getFullYear())+'-'+arNum(('0'+(d.getMonth()+1)).slice(-2))+'-'+arNum(('0'+d.getDate()).slice(-2));}catch(e){return '';} }
+
+function render(){
+  var bm=load('risala-bookmarks'), hl=load('risala-highlights');
+  var bs=document.getElementById('bmSect'), hs=document.getElementById('hlSect');
+  bs.innerHTML='<div class="sect">العلامات المرجعية ('+arNum(bm.length)+')</div>';
+  if(!bm.length){ bs.innerHTML+='<p class="empty">لا علامات بعد — اضغط 🔖 أثناء القراءة.</p>'; }
+  bm.slice().reverse().forEach(function(b,ri){
+    var i=bm.length-1-ri;
+    var li=document.createElement('div'); li.className='archive-list';
+    var url=b.file+(b.art?('?art='+b.art):(b.page?('?pg='+b.page):''));
+    li.innerHTML='<a href="'+url+'"><span class="d">'+(b.title||'موضع محفوظ')+'</span>'
+      +'<span class="t">صفحة '+arNum(b.page||1)+' · '+fmt(b.ts)+'</span></a>';
+    var del=document.createElement('button'); del.className='del'; del.textContent='🗑';
+    del.onclick=function(){ var a=load('risala-bookmarks'); a.splice(i,1); save('risala-bookmarks',a); render(); };
+    li.querySelector('a').appendChild(del); bs.appendChild(li);
+  });
+  hs.innerHTML='<div class="sect">التظليلات ('+arNum(hl.length)+')</div>';
+  if(!hl.length){ hs.innerHTML+='<p class="empty">لا تظليلات بعد — ظلّل نصًّا أثناء القراءة.</p>'; }
+  hl.slice().reverse().forEach(function(h,ri){
+    var i=hl.length-1-ri;
+    var box=document.createElement('div'); box.style.margin='0 0 1.1rem';
+    var url=h.file+'?art='+h.art;
+    box.innerHTML='<p class="quote">«'+h.text+'»</p>'
+      +'<div class="meta"><a href="'+url+'" style="color:var(--ink)">↩ اذهب للموضع</a> · '+fmt(h.ts)+'</div>';
+    var del=document.createElement('button'); del.className='del'; del.textContent='🗑';
+    del.onclick=function(){ var a=load('risala-highlights'); a.splice(i,1); save('risala-highlights',a); render(); };
+    box.querySelector('.meta').appendChild(del); hs.appendChild(box);
+  });
+}
+render();
+document.getElementById('tt').addEventListener('click',function(){
+  var root=document.documentElement, t=root.getAttribute('data-theme');
+  var dark=t?t==='dark':matchMedia('(prefers-color-scheme:dark)').matches;
+  root.setAttribute('data-theme',dark?'light':'dark'); localStorage.setItem('risala-theme',dark?'light':'dark');
+});
+</script>
+</body>
+</html>

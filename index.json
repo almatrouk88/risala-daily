@@ -1,0 +1,9 @@
+{
+  "note": "فهرس بحث على مستوى المقالة. يُحدَّث مع كل يوم جديد (انظر REFILL.md).",
+  "articles": [
+    { "id": "d1-a1", "title": "الرسالة",                       "author": "أحمد حسن الزيات",  "issue": 1, "year": 1933, "day": 1, "file": "days/day-001.html" },
+    { "id": "d1-a2", "title": "اللغة العربية كأداة علمية",     "author": "علي مصطفى مشرَّفة", "issue": 1, "year": 1933, "day": 1, "file": "days/day-001.html" },
+    { "id": "d2-a3", "title": "مصر في دورة الفلك",             "author": "محمد عوض محمد",    "issue": 1, "year": 1933, "day": 2, "file": "days/day-002.html" },
+    { "id": "d2-a4", "title": "حلقة مفقودة",                    "author": "أحمد أمين",        "issue": 1, "year": 1933, "day": 2, "file": "days/day-002.html" }
+  ]
+}
