@@ -32,10 +32,18 @@
   // 3) شريط التحكّم — يستبدل زر ◐ القديم
   var old=document.getElementById('tt'); if(old) old.remove();
   var ctl=document.createElement('div'); ctl.className='ctl';
-  ctl.innerHTML='<button id="c-th" aria-label="الوضع الليلي">◐</button>'
+  ctl.innerHTML='<button id="c-fs" aria-label="ملء الشاشة">⛶</button>'
+              +'<button id="c-th" aria-label="الوضع الليلي">◐</button>'
               +'<button id="c-dn" aria-label="تصغير الخط">A−</button>'
               +'<button id="c-up" aria-label="تكبير الخط">A+</button>';
   document.body.appendChild(ctl);
+
+  document.getElementById('c-fs').addEventListener('click',function(){
+    var d=document, el=d.documentElement;
+    var isFs=d.fullscreenElement||d.webkitFullscreenElement;
+    if(!isFs){ (el.requestFullscreen||el.webkitRequestFullscreen||function(){}).call(el); }
+    else { (d.exitFullscreen||d.webkitExitFullscreen||function(){}).call(d); }
+  });
 
   function setFs(v){ fs=Math.max(88,Math.min(196,v)); root.style.setProperty('--fs',fs+'%'); localStorage.setItem(FS_KEY,fs); }
   document.getElementById('c-up').addEventListener('click',function(){ setFs(fs+12); });
