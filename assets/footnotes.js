@@ -60,15 +60,23 @@
     });
   })();
 
-  // ---- شريط التحكّم ----
+  // ---- شريط التحكّم (مخفيّ افتراضيًّا — يظهر بلمس منتصف الشاشة) ----
+  body.classList.add('hide-ui');
+  var inDays=location.pathname.indexOf('/days/')>=0, pre=inDays?'../':'';
   var old=document.getElementById('tt'); if(old) old.remove();
   var ctl=document.createElement('div'); ctl.className='ctl';
   ctl.innerHTML='<button id="c-pg" aria-label="وضع الكتاب">▤</button>'
               +'<button id="c-bm" aria-label="علامة الصفحة">🔖</button>'
               +'<button id="c-th" aria-label="الوضع الليلي">◐</button>'
               +'<button id="c-dn" aria-label="تصغير الخط">A−</button>'
-              +'<button id="c-up" aria-label="تكبير الخط">A+</button>';
+              +'<button id="c-up" aria-label="تكبير الخط">A+</button>'
+              +'<button id="c-sr" aria-label="بحث">🔍</button>'
+              +'<button id="c-mk" aria-label="علاماتي">✦</button>'
+              +'<button id="c-ar" aria-label="الأرشيف">☰</button>';
   body.appendChild(ctl);
+  document.getElementById('c-sr').addEventListener('click',function(){ location.href=pre+'search.html'; });
+  document.getElementById('c-mk').addEventListener('click',function(){ location.href=pre+'marks.html'; });
+  document.getElementById('c-ar').addEventListener('click',function(){ location.href=pre+'archive.html'; });
 
   var hint=document.createElement('div'); hint.className='taphint'; body.appendChild(hint);
   var hintT;
@@ -174,4 +182,6 @@
 
   // ---- تشغيل ----
   if(paged){ ind.style.display=''; enterPaged(); } else { ind.style.display='none'; handleDeepLink(); }
+  hint.textContent='المس منتصف الشاشة لإظهار الأدوات'; hint.classList.add('show');
+  setTimeout(function(){ hint.classList.remove('show'); }, 2600);
 })();
