@@ -1,5 +1,15 @@
-// يحوّل <span class="g" data-note> إلى حواشٍ مرقّمة + زر الوضع الليلي
+// حواشٍ مرقّمة + تحكّم بالوضع الليلي وحجم الخط (يُحفظ محليًّا)
 (function(){
+  var root=document.documentElement;
+
+  // 1) طبّق حجم الخط المحفوظ فورًا
+  var FS_KEY='risala-fs', TH_KEY='risala-theme';
+  var fs=parseInt(localStorage.getItem(FS_KEY)||'112',10);
+  root.style.setProperty('--fs', fs+'%');
+  var savedTheme=localStorage.getItem(TH_KEY);
+  if(savedTheme) root.setAttribute('data-theme', savedTheme);
+
+  // 2) الحواشي
   var arNum=function(n){return String(n).replace(/[0-9]/g,function(d){return "٠١٢٣٤٥٦٧٨٩"[d]})};
   document.querySelectorAll('.matn').forEach(function(matn,ai){
     var terms=matn.querySelectorAll('.g'); if(!terms.length) return;
@@ -18,10 +28,21 @@
     var src=matn.querySelector('.src');
     if(src){ src.before(ol); } else { matn.appendChild(ol); }
   });
-  var tt=document.getElementById('tt');
-  if(tt){ tt.addEventListener('click',function(){
-    var root=document.documentElement, cur=root.getAttribute('data-theme');
+
+  // 3) شريط التحكّم — يستبدل زر ◐ القديم
+  var old=document.getElementById('tt'); if(old) old.remove();
+  var ctl=document.createElement('div'); ctl.className='ctl';
+  ctl.innerHTML='<button id="c-th" aria-label="الوضع الليلي">◐</button>'
+              +'<button id="c-dn" aria-label="تصغير الخط">A−</button>'
+              +'<button id="c-up" aria-label="تكبير الخط">A+</button>';
+  document.body.appendChild(ctl);
+
+  function setFs(v){ fs=Math.max(88,Math.min(196,v)); root.style.setProperty('--fs',fs+'%'); localStorage.setItem(FS_KEY,fs); }
+  document.getElementById('c-up').addEventListener('click',function(){ setFs(fs+12); });
+  document.getElementById('c-dn').addEventListener('click',function(){ setFs(fs-12); });
+  document.getElementById('c-th').addEventListener('click',function(){
+    var cur=root.getAttribute('data-theme');
     var dark=cur?cur==='dark':matchMedia('(prefers-color-scheme:dark)').matches;
-    root.setAttribute('data-theme',dark?'light':'dark');
-  }); }
+    var next=dark?'light':'dark'; root.setAttribute('data-theme',next); localStorage.setItem(TH_KEY,next);
+  });
 })();
