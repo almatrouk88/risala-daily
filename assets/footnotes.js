@@ -99,8 +99,10 @@
     var colW=flow.clientWidth; flow.style.columnWidth=colW+'px';
     step=colW+GAP; pages=Math.max(1, Math.round((flow.scrollWidth+GAP)/step));
   }
+  function saveLast(page){ try{ localStorage.setItem('risala-last', JSON.stringify(
+    {file:file, page:page, title:document.title, ts:Date.now()})); }catch(e){} }
   function render(){ flow.style.setProperty('--px',(cur*step)+'px');
-    ind.textContent='صفحة '+arNum(cur+1)+' / '+arNum(pages); localStorage.setItem(PAGEKEY,cur); }
+    ind.textContent='صفحة '+arNum(cur+1)+' / '+arNum(pages); localStorage.setItem(PAGEKEY,cur); saveLast(cur+1); }
   function setPage(p){ cur=Math.max(0,Math.min(pages-1,p)); render(); }
   function pageOf(el){ for(var p=0;p<pages;p++){ cur=p; flow.style.setProperty('--px',(p*step)+'px');
       var r=el.getBoundingClientRect(); if(r.right>0 && r.left<window.innerWidth) return p; } return 0; }
@@ -190,7 +192,8 @@
       body.classList.toggle('hide-ui', !!f); setTimeout(relayout,60); }); });
 
   // ---- تشغيل ----
-  if(paged){ ind.style.display=''; enterPaged(); } else { ind.style.display='none'; handleDeepLink(); }
+  if(paged){ ind.style.display=''; enterPaged(); } else { ind.style.display='none'; handleDeepLink(); saveLast(1); }
+  var slT; window.addEventListener('scroll', function(){ if(paged) return; clearTimeout(slT); slT=setTimeout(function(){ saveLast(1); }, 500); });
   hint.textContent='المس منتصف الشاشة لإظهار الأدوات'; hint.classList.add('show');
   setTimeout(function(){ hint.classList.remove('show'); }, 2600);
 })();

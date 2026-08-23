@@ -2,44 +2,72 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
-<title>الرسالة · قراءة اليوم</title>
+<title>الرسالة · الرئيسية</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="assets/style.css?v=11">
+<link rel="stylesheet" href="assets/style.css?v=12">
 <link rel="manifest" href="app.webmanifest">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#111111">
 <link rel="apple-touch-icon" href="assets/icon.svg">
-<script>
-// يوجّه إلى قراءة اليوم حسب التاريخ. اليوم ١ = 2026-08-22.
-(function(){
-  var START = Date.UTC(2026, 7, 22); // (الشهر 0-based: 7 = أغسطس)
-  function go(total){
-    var now = new Date();
-    var today = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
-    var n = Math.floor((today - START) / 86400000) + 1;
-    if (n < 1) n = 1;
-    if (n > total) n = total;
-    location.replace('days/day-' + String(n).padStart(3,'0') + '.html');
-  }
-  fetch('manifest.json', {cache:'no-store'})
-    .then(function(r){ return r.json(); })
-    .then(function(m){ go(m.total || 1); })
-    .catch(function(){ location.replace('days/day-001.html'); });
-})();
-</script>
 </head>
 <body>
-<div class="wrap" style="text-align:center;padding-top:4rem">
-  <div class="mast" style="border:0">
+<button class="tt" id="tt" aria-label="تبديل الوضع">◐</button>
+<div class="wrap">
+  <nav class="nav">
+    <a class="home" href="index.html">📜 الرسالة</a>
+    <span style="display:flex;gap:.45rem"><a href="search.html">🔍 بحث</a><a href="marks.html">🔖 علاماتي</a></span>
+  </nav>
+  <header class="mast">
     <p class="k">مجلة الرسالة</p>
     <h1>الرِّسالة</h1>
-    <p class="m">جارٍ فتح قراءة اليوم…</p>
-  </div>
-  <noscript>
-    <p style="margin-top:2rem"><a href="days/day-001.html">ابدأ من اليوم الأوّل ←</a> · <a href="archive.html">كل الأيّام</a></p>
-  </noscript>
-  <p style="margin-top:2rem"><a href="archive.html">أو تصفّح كل الأيّام →</a></p>
+    <p class="m">كتابُ قراءةٍ من أعداد المجلّة · منذ ١٩٣٣</p>
+  </header>
+
+  <div id="resume"></div>
+
+  <div class="sect-h">الأعداد</div>
+  <ul class="archive-list" id="issues"><li>…جارٍ التحميل</li></ul>
+
+  <p style="text-align:center;margin:1.6rem 0 0"><a id="todayLink" class="soft-link" href="#">📅 قراءة اليوم بالتاريخ</a></p>
 </div>
+<script>
+var arNum=function(n){return String(n).replace(/[0-9]/g,function(d){return "٠١٢٣٤٥٦٧٨٩"[d]});};
+
+(function(){
+  var last=null; try{ last=JSON.parse(localStorage.getItem('risala-last')||'null'); }catch(e){}
+  var box=document.getElementById('resume');
+  if(last && last.file){
+    box.innerHTML='<a class="resume-btn" href="'+last.file+'?pg='+(last.page||1)+'">'
+      +'<span class="rt">▶ متابعة القراءة</span>'
+      +'<span class="rs">'+(last.title? String(last.title).replace('الرسالة · ','') : 'آخر موضع')+' · صفحة '+arNum(last.page||1)+'</span></a>';
+  }
+})();
+
+fetch('index.json',{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){
+  var arts=j.articles||[], issues=j.issues||[];
+  var byIssue={}; arts.forEach(function(a){ (byIssue[a.issue]=byIssue[a.issue]||[]).push(a); });
+  var ul=document.getElementById('issues'); ul.innerHTML='';
+  issues.sort(function(a,b){return a.n-b.n;}).forEach(function(iss){
+    var cnt=(byIssue[iss.n]||[]).length;
+    var li=document.createElement('li'); var a=document.createElement('a');
+    a.href='issue.html?n='+iss.n;
+    a.innerHTML='<span class="d">العدد '+arNum(iss.n)+'</span><span class="t">'+(iss.date||'')+' · '+arNum(cnt)+' مقالة</span>';
+    li.appendChild(a); ul.appendChild(li);
+  });
+});
+
+fetch('manifest.json',{cache:'no-store'}).then(function(r){return r.json();}).then(function(m){
+  var START=Date.UTC(2026,7,22), now=new Date();
+  var today=Date.UTC(now.getFullYear(),now.getMonth(),now.getDate());
+  var n=Math.floor((today-START)/86400000)+1; if(n<1)n=1; if(n>m.total)n=m.total;
+  document.getElementById('todayLink').href='days/day-'+String(n).padStart(3,'0')+'.html';
+});
+
+document.getElementById('tt').addEventListener('click',function(){
+  var root=document.documentElement, t=root.getAttribute('data-theme');
+  var dark=t?t==='dark':matchMedia('(prefers-color-scheme:dark)').matches;
+  root.setAttribute('data-theme',dark?'light':'dark'); localStorage.setItem('risala-theme',dark?'light':'dark'); });
+</script>
 </body>
 </html>
