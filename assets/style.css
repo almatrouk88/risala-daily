@@ -18,7 +18,7 @@
   html{-webkit-text-size-adjust:100%; font-size:var(--fs,112%)}
   body{
     margin:0; background:var(--bg); color:var(--ink);
-    font-family:var(--body); font-size:1.32rem; line-height:2.05;
+    font-family:var(--body); font-size:1.3rem; line-height:1.75;
     text-rendering:optimizeLegibility;
   }
   .wrap{max-width:42rem; margin:0 auto; padding:clamp(.8rem,3vw,1.6rem) clamp(.7rem,3vw,1.2rem) 3rem}
@@ -42,7 +42,7 @@
   .card p{margin:0; font-size:1.02rem; line-height:1.75; color:var(--ink)}
 
   .matn{margin-top:1.4rem}
-  .matn p{margin:0 0 1.05rem; text-align:justify}
+  .matn p{margin:0 0 .5rem; text-align:justify; line-height:1.75}
   .g{font-weight:700; border-bottom:1px solid currentColor}
   sup.fn{font-weight:700; font-size:.62em; line-height:0}
   sup.fn a{text-decoration:none; color:var(--ink); padding:0 .12em}
@@ -99,7 +99,7 @@
 
   /* وضع الكتاب: صفحات حقيقية بأعمدة (بلا قصّ أسطر) */
   body.paged{overflow:hidden; height:100vh}
-  #vp{position:fixed; inset:0; overflow:hidden; padding:30px 26px 46px; box-sizing:border-box; background:var(--bg); z-index:1}
+  #vp{position:fixed; inset:0; overflow:hidden; padding:18px 24px 20px; box-sizing:border-box; background:var(--bg); z-index:1}
   body.paged .wrap{max-width:none; margin:0; padding:0; height:100%; column-gap:52px; column-fill:auto;
     transform:translateX(var(--px,0px))}
   body.paged .tt{display:none}
