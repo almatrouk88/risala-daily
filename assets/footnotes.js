@@ -88,6 +88,11 @@
   var flow=document.querySelector('.wrap'), vp=null, step=0, pages=1, cur=0;
   var PAGEKEY='risala-pg:'+file;
   function layout(){
+    // ارتفاع الصفحة بالبكسل بالضبط ← يملأ العمود للأسفل بلا فراغ
+    var cs=getComputedStyle(vp);
+    var h=vp.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+    flow.style.height=h+'px';
+    flow.style.columnFill='auto';
     var colW=flow.clientWidth; flow.style.columnWidth=colW+'px';
     step=colW+GAP; pages=Math.max(1, Math.round((flow.scrollWidth+GAP)/step));
   }
@@ -105,7 +110,8 @@
   }
   function exitPaged(){ body.classList.remove('paged');
     if(vp){ vp.parentNode.insertBefore(flow,vp); vp.remove(); vp=null; }
-    flow.style.removeProperty('--px'); flow.style.removeProperty('column-width'); ind.style.display='none'; }
+    flow.style.removeProperty('--px'); flow.style.removeProperty('column-width');
+    flow.style.removeProperty('height'); flow.style.removeProperty('column-fill'); ind.style.display='none'; }
   function relayout(){ if(!paged) return; var c=cur; layout(); setPage(c); }
   function handleDeepLink(){
     var q=new URLSearchParams(location.search);
