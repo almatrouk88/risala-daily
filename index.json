@@ -1,12 +1,183 @@
 {
   "note": "فهرس بحث وتصفّح على مستوى المقالة والعدد. يُحدَّث مع كل يوم جديد (انظر REFILL.md).",
   "issues": [
-    { "n": 1, "date": "١٥ يناير ١٩٣٣", "year": 1933 }
+    {
+      "n": 1,
+      "date": "١٥ يناير ١٩٣٣",
+      "year": 1933
+    }
   ],
   "articles": [
-    { "id": "d1-a1", "title": "الرسالة",                       "author": "أحمد حسن الزيات",  "issue": 1, "year": 1933, "day": 1, "file": "days/day-001.html" },
-    { "id": "d1-a2", "title": "اللغة العربية كأداة علمية",     "author": "علي مصطفى مشرَّفة", "issue": 1, "year": 1933, "day": 1, "file": "days/day-001.html" },
-    { "id": "d2-a3", "title": "مصر في دورة الفلك",             "author": "محمد عوض محمد",    "issue": 1, "year": 1933, "day": 2, "file": "days/day-002.html" },
-    { "id": "d2-a4", "title": "حلقة مفقودة",                    "author": "أحمد أمين",        "issue": 1, "year": 1933, "day": 2, "file": "days/day-002.html" }
+    {
+      "id": "d1-a1",
+      "title": "الرسالة",
+      "author": "أحمد حسن الزيات",
+      "issue": 1,
+      "year": 1933,
+      "day": 1,
+      "file": "days/day-001.html"
+    },
+    {
+      "id": "d1-a2",
+      "title": "اللغة العربية كأداة علمية",
+      "author": "علي مصطفى مشرفة",
+      "issue": 1,
+      "year": 1933,
+      "day": 1,
+      "file": "days/day-001.html"
+    },
+    {
+      "id": "d2-a3",
+      "title": "مصر في دورة الفلك",
+      "author": "محمد عوض محمد",
+      "issue": 1,
+      "year": 1933,
+      "day": 2,
+      "file": "days/day-002.html"
+    },
+    {
+      "id": "d2-a4",
+      "title": "حلقة مفقودة",
+      "author": "أحمد أمين",
+      "issue": 1,
+      "year": 1933,
+      "day": 2,
+      "file": "days/day-002.html"
+    },
+    {
+      "id": "d3-a5",
+      "title": "أثر الثقافة العربية في العلم والعالم",
+      "author": "أحمد حسن الزيات",
+      "issue": 1,
+      "year": 1933,
+      "day": 3,
+      "file": "days/day-003.html"
+    },
+    {
+      "id": "d3-a6",
+      "title": "في تعدد الأوضاع البلبلة والضياع",
+      "author": "عبد القادر المغربي",
+      "issue": 1,
+      "year": 1933,
+      "day": 3,
+      "file": "days/day-003.html"
+    },
+    {
+      "id": "d4-a7",
+      "title": "رسالة الأديب في مصر",
+      "author": "عبد الحميد يونس",
+      "issue": 1,
+      "year": 1933,
+      "day": 4,
+      "file": "days/day-004.html"
+    },
+    {
+      "id": "d4-a8",
+      "title": "في الأدب العربي — العبقرية والقريحة",
+      "author": "أحمد حسن الزيات",
+      "issue": 1,
+      "year": 1933,
+      "day": 4,
+      "file": "days/day-004.html"
+    },
+    {
+      "id": "d5-a9",
+      "title": "حلقات في الأدب",
+      "author": "محمد عبد الله عنان",
+      "issue": 1,
+      "year": 1933,
+      "day": 5,
+      "file": "days/day-005.html"
+    },
+    {
+      "id": "d5-a10",
+      "title": "من طرائف الشعر",
+      "author": "محمد عوض محمد",
+      "issue": 1,
+      "year": 1933,
+      "day": 5,
+      "file": "days/day-005.html"
+    },
+    {
+      "id": "d6-a11",
+      "title": "في الأدب الشرقي",
+      "author": "عبد الوهاب عزام",
+      "issue": 1,
+      "year": 1933,
+      "day": 6,
+      "file": "days/day-006.html"
+    },
+    {
+      "id": "d6-a12",
+      "title": "في الأدب الغربي",
+      "author": "ألفونس دو لامارتين",
+      "issue": 1,
+      "year": 1933,
+      "day": 6,
+      "file": "days/day-006.html"
+    },
+    {
+      "id": "d7-a13",
+      "title": "بيت الراعي",
+      "author": "ألفريد دي فينيي",
+      "issue": 1,
+      "year": 1933,
+      "day": 7,
+      "file": "days/day-007.html"
+    },
+    {
+      "id": "d7-a14",
+      "title": "العلوم",
+      "author": "أحمد زكي",
+      "issue": 1,
+      "year": 1933,
+      "day": 7,
+      "file": "days/day-007.html"
+    },
+    {
+      "id": "d8-a15",
+      "title": "العالم النسائي",
+      "author": "جميل صدقي الزهاوي",
+      "issue": 1,
+      "year": 1933,
+      "day": 8,
+      "file": "days/day-008.html"
+    },
+    {
+      "id": "d8-a16",
+      "title": "الجمال والحب",
+      "author": "باب من أبواب المجلّة",
+      "issue": 1,
+      "year": 1933,
+      "day": 8,
+      "file": "days/day-008.html"
+    },
+    {
+      "id": "d9-a17",
+      "title": "القصص",
+      "author": "طه حسين",
+      "issue": 1,
+      "year": 1933,
+      "day": 9,
+      "file": "days/day-009.html"
+    },
+    {
+      "id": "d9-a18",
+      "title": "الشيخ عفا الله",
+      "author": "محمود تيمور",
+      "issue": 1,
+      "year": 1933,
+      "day": 9,
+      "file": "days/day-009.html"
+    },
+    {
+      "id": "d10-a19",
+      "title": "في الأكاديمية الفرنسية",
+      "author": "باب من أبواب المجلّة",
+      "issue": 1,
+      "year": 1933,
+      "day": 10,
+      "file": "days/day-010.html"
+    }
   ]
 }
