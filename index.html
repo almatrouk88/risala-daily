@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>الرسالة · الرئيسية</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="assets/style.css?v=12">
+<link rel="stylesheet" href="assets/style.css?v=13">
 <link rel="manifest" href="app.webmanifest">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -29,7 +29,10 @@
   <div class="sect-h">الأعداد</div>
   <ul class="archive-list" id="issues"><li>…جارٍ التحميل</li></ul>
 
-  <p style="text-align:center;margin:1.6rem 0 0"><a id="todayLink" class="soft-link" href="#">📅 قراءة اليوم بالتاريخ</a></p>
+  <p style="text-align:center;margin:1.6rem 0 0; display:flex; gap:.5rem; justify-content:center; flex-wrap:wrap">
+    <a id="todayLink" class="soft-link" href="#">📅 قراءة اليوم بالتاريخ</a>
+    <button id="cloudRestore" class="soft-link" style="cursor:pointer">☁↓ استعادة موضعي من السحابة</button>
+  </p>
 </div>
 <script>
 var arNum=function(n){return String(n).replace(/[0-9]/g,function(d){return "٠١٢٣٤٥٦٧٨٩"[d]});};
@@ -62,6 +65,15 @@ fetch('manifest.json',{cache:'no-store'}).then(function(r){return r.json();}).th
   var today=Date.UTC(now.getFullYear(),now.getMonth(),now.getDate());
   var n=Math.floor((today-START)/86400000)+1; if(n<1)n=1; if(n>m.total)n=m.total;
   document.getElementById('todayLink').href='days/day-'+String(n).padStart(3,'0')+'.html';
+});
+
+document.getElementById('cloudRestore').addEventListener('click',function(){
+  var b=this; b.textContent='☁ جارٍ الاستعادة…';
+  fetch('https://kvdb.io/Hj8v3hbdFx6wBP8hrRyaUk/risala_pos',{cache:'no-store'})
+    .then(function(r){return r.json();}).then(function(p){
+      if(p&&p.file){ location.href='/risala-daily/'+p.file+'?pg='+(p.page||1); }
+      else { b.textContent='لا يوجد موضع محفوظ'; }
+    }).catch(function(){ b.textContent='تعذّر الاتصال بالسحابة'; });
 });
 
 document.getElementById('tt').addEventListener('click',function(){

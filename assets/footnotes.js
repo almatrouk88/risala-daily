@@ -71,10 +71,27 @@
               +'<button id="c-th" aria-label="الوضع الليلي">◐</button>'
               +'<button id="c-dn" aria-label="تصغير الخط">A−</button>'
               +'<button id="c-up" aria-label="تكبير الخط">A+</button>'
+              +'<button id="c-cup" aria-label="حفظ الموضع للسحابة">☁↑</button>'
+              +'<button id="c-cdn" aria-label="استعادة الموضع من السحابة">☁↓</button>'
               +'<button id="c-sr" aria-label="بحث">🔍</button>'
               +'<button id="c-mk" aria-label="علاماتي">✦</button>'
               +'<button id="c-ar" aria-label="الأرشيف">☰</button>';
   body.appendChild(ctl);
+  var SYNC='https://kvdb.io/Hj8v3hbdFx6wBP8hrRyaUk/risala_pos';
+  document.getElementById('c-cup').addEventListener('click',function(){
+    var last=localStorage.getItem('risala-last')||JSON.stringify({file:file,page:(paged?cur+1:1),title:document.title,ts:Date.now()});
+    showHint('☁ جارٍ الحفظ…');
+    fetch(SYNC,{method:'PUT',headers:{'Content-Type':'application/json'},body:last})
+      .then(function(r){ showHint(r.ok?'☁ حُفظ موضعك للسحابة':'تعذّر الحفظ'); })
+      .catch(function(){ showHint('تعذّر الاتصال بالسحابة'); });
+  });
+  document.getElementById('c-cdn').addEventListener('click',function(){
+    showHint('☁ جارٍ الاستعادة…');
+    fetch(SYNC,{cache:'no-store'}).then(function(r){return r.json();}).then(function(p){
+      if(p&&p.file){ location.href='/risala-daily/'+p.file+'?pg='+(p.page||1); }
+      else showHint('لا يوجد موضع محفوظ');
+    }).catch(function(){ showHint('تعذّر الاتصال بالسحابة'); });
+  });
   document.getElementById('c-sr').addEventListener('click',function(){ location.href=pre+'search.html'; });
   document.getElementById('c-mk').addEventListener('click',function(){ location.href=pre+'marks.html'; });
   document.getElementById('c-ar').addEventListener('click',function(){ location.href=pre+'archive.html'; });
