@@ -127,3 +127,6 @@
     border-bottom:1px solid var(--line); padding-bottom:.35rem; margin:1.2rem 0 .8rem}
   .soft-link{color:var(--soft); text-decoration:none; font-size:.95rem; border:1px solid var(--line);
     border-radius:20px; padding:.45rem 1rem; background:var(--card)}
+
+  /* منع انقسام الصناديق والعناوين بين صفحتين في وضع الكتاب */
+  h1,h2,.by,.badge,.idea,.reflect,.termbox,.sources,.card,.signoff,.notes{break-inside:avoid}
