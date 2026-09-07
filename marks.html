@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>الرسالة · علاماتي</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="assets/style.css?v=16">
+<link rel="stylesheet" href="assets/style.css?v=17">
 <link rel="manifest" href="app.webmanifest">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -36,6 +36,7 @@
   </header>
   <div id="bmSect"></div>
   <div id="hlSect"></div>
+  <div id="ntSect"></div>
 </div>
 <script>
 var arNum=function(n){return String(n).replace(/[0-9]/g,function(d){return "٠١٢٣٤٥٦٧٨٩"[d]});};
@@ -70,6 +71,12 @@ function render(){
     del.onclick=function(){ var a=load('risala-highlights'); a.splice(i,1); save('risala-highlights',a); render(); };
     box.querySelector('.meta').appendChild(del); hs.appendChild(box);
   });
+  var nt={};try{nt=JSON.parse(localStorage.getItem('risala-notes')||'{}');}catch(e){}
+  var nk=Object.keys(nt), ne=document.getElementById('ntSect');
+  ne.innerHTML='<div class="sect">ملاحظاتي ('+arNum(nk.length)+')</div>';
+  if(!nk.length) ne.innerHTML+='<p class="empty">لا ملاحظات — اكتب واحدة بزر 📝 أثناء القراءة.</p>';
+  nk.forEach(function(k){var o=nt[k]||{};var d=document.createElement('div');d.style.margin='0 0 1.1rem';
+   d.innerHTML='<p class="quote" style="font-style:normal">'+(o.t||'')+'</p><div class="meta"><a href="'+k+'" style="color:var(--ink)">↩ '+((o.title||'').replace('الرسالة · ',''))+'</a></div>';ne.appendChild(d);});
 }
 render();
 document.getElementById('tt').addEventListener('click',function(){
