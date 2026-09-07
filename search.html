@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>الرسالة · البحث</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="assets/style.css?v=15">
+<link rel="stylesheet" href="assets/style.css?v=16">
 <link rel="manifest" href="app.webmanifest">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -72,7 +72,7 @@ function run(){
   var t=norm(document.getElementById('fTitle').value), a=norm(document.getElementById('fAuthor').value);
   var y=document.getElementById('fYear').value, iss=document.getElementById('fIssue').value;
   var res=DATA.filter(function(x){
-    if(q){ if(norm(x.title).indexOf(q)<0 && norm(x.author).indexOf(q)<0) return false; }
+    if(q){ if(norm(x.title).indexOf(q)<0 && norm(x.author).indexOf(q)<0 && norm(x.text||"").indexOf(q)<0) return false; }
     if(t && norm(x.title).indexOf(t)<0) return false;
     if(a && norm(x.author).indexOf(a)<0) return false;
     if(y && String(x.year)!==y) return false;
