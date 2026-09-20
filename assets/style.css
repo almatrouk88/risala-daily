@@ -57,6 +57,9 @@
   .notes li b{color:var(--ink)}
   .src{display:inline-block; margin:1rem 0 0; font-size:.9rem; color:var(--faint)}
   :target{background:rgba(120,120,120,.18)}
+  .doneBtn{display:block; width:100%; margin:1.3rem 0 0; padding:.7rem 1rem; font-size:.95rem; font-weight:700;
+    background:var(--card); border:1px solid var(--cardline); border-radius:.4rem; color:var(--ink); cursor:pointer}
+  .doneBtn.done{background:var(--ink); color:var(--bg); border-color:var(--ink)}
 
   footer{margin:3rem 0 0; padding-top:1.4rem; border-top:3px double var(--line-strong); text-align:center; color:var(--soft)}
   footer .big{font-weight:700; color:var(--ink); font-size:1.15rem; margin:.2rem 0}

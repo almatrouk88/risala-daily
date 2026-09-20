@@ -135,6 +135,32 @@
     window.addEventListener('beforeunload',function(){ try{synth.cancel();}catch(e){} });
   })();
 
+  // ---- نظام «مكتمل» لكل مقالة (زرّ أسفل كلّ مقالة + رفع تلقائيّ للسحابة يظهر في أيّ جهاز) ----
+  var READ_KEY='risala-read';
+  var READ_SYNC='https://kvdb.io/Hj8v3hbdFx6wBP8hrRyaUk/risala_read';
+  function readMap(){ try{return JSON.parse(localStorage.getItem(READ_KEY)||'{}');}catch(e){return {};} }
+  function isRead(id){ return !!readMap()[id]; }
+  function updateDoneBtn(id){ var b=document.querySelector('.doneBtn[data-art="'+id+'"]'); if(!b) return;
+    var done=isRead(id); b.textContent=done?'✓ اكتملت قراءتها':'○ علّم القراءة مكتملة'; b.classList.toggle('done',done); }
+  function setRead(id,val){ if(!id) return; var m=readMap(); if(val){ if(!m[id]) m[id]=Date.now(); } else delete m[id];
+    localStorage.setItem(READ_KEY, JSON.stringify(m)); updateDoneBtn(id);
+    fetch(READ_SYNC,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(m)}).catch(function(){}); }
+  document.querySelectorAll('article').forEach(function(art){
+    var matn=art.querySelector('.matn'); if(!matn||!art.id) return;
+    var btn=document.createElement('button'); btn.type='button'; btn.className='doneBtn'; btn.dataset.art=art.id;
+    matn.appendChild(btn); updateDoneBtn(art.id);
+    btn.addEventListener('click',function(e){ e.stopPropagation(); var now=!isRead(art.id); setRead(art.id, now);
+      showHint(now?'✓ عُلّمت مكتملة (رُفعت للسحابة)':'أُزيلت علامة الاكتمال'); });
+  });
+  // نجلب علامات الاكتمال من السحابة عند فتح أيّ صفحة وندمجها محليًّا (بلا حذف — اتحاد بين الأجهزة)
+  fetch(READ_SYNC,{cache:'no-store'}).then(function(r){return r.json();}).then(function(remote){
+    if(!remote||typeof remote!=='object') return;
+    var local=readMap(), changed=false;
+    Object.keys(remote).forEach(function(id){ if(!local[id]){ local[id]=remote[id]; changed=true; } });
+    if(changed){ localStorage.setItem(READ_KEY, JSON.stringify(local));
+      document.querySelectorAll('article').forEach(function(art){ if(art.id) updateDoneBtn(art.id); }); }
+  }).catch(function(){});
+
   var SYNC='https://kvdb.io/Hj8v3hbdFx6wBP8hrRyaUk/risala_pos';
   document.getElementById('c-cup').addEventListener('click',function(){
     var last=localStorage.getItem('risala-last')||JSON.stringify({file:file,page:(paged?cur+1:1),title:document.title,ts:Date.now()});
@@ -197,8 +223,13 @@
   function handleDeepLink(){
     var q=new URLSearchParams(location.search);
     var art=q.get('art'), pg=q.get('pg');
-    if(art){ var el=document.getElementById(art); if(el){ setPage(pageOf(el)); return; } }
+    if(art){ var el=document.getElementById(art); if(el){ if(paged){ setPage(pageOf(el)); } else { el.scrollIntoView({block:'start'}); } return; } }
     if(pg){ var n=parseInt(pg,10); if(!isNaN(n)) setPage(n-1); }
+  }
+  // خطّ Amiri يصل عبر الشبكة؛ إن لم يكتمل تحميله قبل الحساب الأول تتغيّر أبعاد الأسطر بعد الرسم
+  // فيصبح الحساب القديم خاطئًا (تُفتح مقالة مجاورة بدل المطلوبة) — نعيد الحساب فور اكتمال الخطوط
+  if(document.fonts && document.fonts.ready){
+    document.fonts.ready.then(function(){ if(paged) layout(); handleDeepLink(); }).catch(function(){});
   }
 
   // ---- الأزرار ----
