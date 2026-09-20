@@ -60,6 +60,17 @@ fetch('index.json',{cache:'no-store'}).then(function(r){return r.json();}).then(
     a.innerHTML='<span class="d">العدد '+arNum(iss.n)+'</span><span class="t">'+(iss.date||'')+' · '+arNum(cnt)+' مقالة</span>';
     li.appendChild(a); ul.appendChild(li);
   });
+  // إذا أنهيتَ كلّ مقالات آخر يوم كنتَ فيه (أو لا يوجد موضع محفوظ)، اجعل «متابعة القراءة» تأخذك للمقالة التالية غير المقروءة تلقائيًّا
+  var READ={}; try{READ=JSON.parse(localStorage.getItem('risala-read')||'{}');}catch(e){}
+  var _nu=arts.filter(function(a){return !READ[a.id];})[0];
+  var last=null; try{last=JSON.parse(localStorage.getItem('risala-last')||'null');}catch(e){}
+  var lastFileArts=last&&arts.filter(function(a){return a.file===last.file;});
+  var lastFileAllRead=lastFileArts&&lastFileArts.length&&lastFileArts.every(function(a){return READ[a.id];});
+  if(!last||lastFileAllRead){
+    var box=document.getElementById('resume');
+    if(_nu){ box.innerHTML='<a class="resume-btn" href="'+_nu.file+'?art='+_nu.id+'"><span class="rt">▶ التالي غير المقروء</span><span class="rs">'+_nu.title+'</span></a>'; }
+    else if(arts.length){ box.innerHTML='<div class="resume-btn"><span class="rt">✓ أنهيتَ كلّ المقالات</span><span class="rs">أحسنت!</span></div>'; }
+  }
 });
 
 fetch('manifest.json',{cache:'no-store'}).then(function(r){return r.json();}).then(function(m){
